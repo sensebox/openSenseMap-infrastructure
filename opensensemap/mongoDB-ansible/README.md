@@ -1,5 +1,16 @@
 # How to run this ansible playbook?
 
+### Todo
+- add some swap
+- set swappiness to 1
+- set noop scheduler for xfs device
+- set up NTP
+- set readahead setting to 0
+- let mongod only listen to internal ip
+- read something about read and write concerns
+- read something about replication protocol version
+
+
 - Configure `/etc/ansible/hosts` like this:
 ```text
 [mongodb]
