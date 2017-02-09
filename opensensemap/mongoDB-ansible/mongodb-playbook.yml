@@ -1,0 +1,78 @@
+---
+- hosts: all
+  gather_facts: False
+  become: yes
+
+  tasks:
+  - name: install python 2
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+- hosts: mongodb
+  remote_user: ubuntu
+  become: yes
+  pre_tasks:
+    - name: create partition
+      shell:  echo -e "o\nn\np\n1\n\n\nw" | fdisk {{ xfs_disk }} && touch /partition_created
+      args:
+        creates: /partition_created
+    - name: create xfs
+      filesystem:
+        fstype: xfs
+        dev: "{{ xfs_disk }}1"
+    - name: mount xfs disk
+      mount:
+        state: mounted
+        fstype: xfs
+        opts: defaults,noatime
+        src: "{{ xfs_disk }}1"
+        name: "{{ xfs_disk_mountpoint }}"
+        dump: 0
+        passno: 0
+    - name: create systemd unit file for configuring transparent hugepages
+      copy:
+        dest: /etc/systemd/system/disable-transparent-huge-pages.service
+        owner: root
+        src: ./disable-transparent-huge-pages.service
+    - name: run systemd unit file for configuring transparent hugepages
+      systemd:
+        name: disable-transparent-huge-pages
+        daemon_reload: yes
+        enabled: yes
+        state: started
+    - name: create mongodb_keyfile
+      copy:
+        dest: /etc/mongodb_keyfile
+        src: ./mongodb_keyfile
+        owner: mongodb
+        mode: 0400
+
+  post_tasks:
+    - name: overwrite mongod systemd unit file with optimized unit file
+      copy:
+        dest: /etc/systemd/system/mongod.service
+        src: ./optimized-mongod.service
+        owner: root
+    - name: add keyfile option to /etc/mongod.conf
+      blockinfile:
+        name: /etc/mongod.conf
+        block: |
+          keyFile = /etc/mongodb_keyfile
+    - name: restart mongod service
+      systemd:
+        name: mongod
+        daemon_reload: yes
+        enabled: yes
+        state: restarted
+
+  roles:
+  - Stouts.mongodb
+  vars:
+    xfs_disk: /dev/xvdb
+    xfs_disk_mountpoint: /mongo_xfs_data
+    mongodb_conf_dbpath: /mongo_xfs_data/data
+    mongodb_version: "3.2.12"
+    mongodb_conf_noprealloc: yes
+    mongodb_conf_journal: yes
+    mongodb_conf_auth: yes
+    mongodb_conf_replSet: rs0
+
