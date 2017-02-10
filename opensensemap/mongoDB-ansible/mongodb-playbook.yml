@@ -7,6 +7,11 @@
   - name: install python 2
     raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
 
+- hosts: all
+  become: yes
+  roles:
+    - geerlingguy.ntp
+
 - hosts: mongodb
   remote_user: ubuntu
   become: yes
@@ -23,7 +28,7 @@
       mount:
         state: mounted
         fstype: xfs
-        opts: defaults,noatime
+        opts: defaults,noatime,discard
         src: "{{ xfs_disk }}1"
         name: "{{ xfs_disk_mountpoint }}"
         dump: 0
