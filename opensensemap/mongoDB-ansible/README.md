@@ -1,7 +1,6 @@
 # How to run this ansible playbook?
 
 ### Todo
-- set noop scheduler for xfs device
 - set readahead setting to 0
 - let mongod only listen to internal ip
 - read something about read and write concerns
