@@ -1,8 +1,6 @@
 # How to run this ansible playbook?
 
-### Todo
-- read something about read and write concerns
-- read something about replication protocol version
+This playbook assumes the host has at least 2 disks of which one will be formatted with XFS. On it, the mongodb db path will live.
 
 Please be aware that this playbook does not configure a firewall and possibly sets the mongod bind ip to the ip of eth0 which possibly could be the external ip. If you're on AWS you should set correct security groups or otherwise install a firewall
 
@@ -17,3 +15,7 @@ Please be aware that this playbook does not configure a firewall and possibly se
 
 #### Run
 `ansible-playbook --private-key <path to your private key> --inventory-file hosts.ini mongodb-playbook.yml`
+
+### Todo
+- read something about read and write concerns
+- read something about replication protocol version
