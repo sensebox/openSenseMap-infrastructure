@@ -43,10 +43,21 @@
       copy:
         dest: /etc/systemd/system/disable-transparent-huge-pages.service
         owner: root
-        src: ./disable-transparent-huge-pages.service
+        src: ./files/disable-transparent-huge-pages.service
     - name: run systemd unit file for configuring transparent hugepages
       systemd:
         name: disable-transparent-huge-pages
+        daemon_reload: yes
+        enabled: yes
+        state: started
+    - name: create systemd unit file for setting readahead to 0 for {{ xfs_disk }}
+      template:
+        dest: /etc/systemd/system/set-readahead.service
+        owner: root
+        src: ./files/set-readahead.service.j2
+    - name: run systemd unit file for setting readahead to 0 for {{ xfs_disk }}
+      systemd:
+        name: set-readahead
         daemon_reload: yes
         enabled: yes
         state: started
@@ -55,13 +66,13 @@
     - name: create mongodb_keyfile
       copy:
         dest: /etc/mongodb_keyfile
-        src: ./mongodb_keyfile
+        src: ./files/mongodb_keyfile
         owner: mongodb
         mode: 0400
     - name: overwrite mongod systemd unit file with optimized unit file
       copy:
         dest: /etc/systemd/system/mongod.service
-        src: ./optimized-mongod.service
+        src: ./files/optimized-mongod.service
         owner: root
     - name: add keyfile option to /etc/mongod.conf
       blockinfile:

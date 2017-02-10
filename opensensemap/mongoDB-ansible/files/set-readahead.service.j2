@@ -1,0 +1,9 @@
+[Unit]
+Description=Set readahead value to 0 for {{ xfs_disk }}
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "/sbin/blockdev --setra 0 {{ xfs_disk }}"
+
+[Install]
+WantedBy=multi-user.target
