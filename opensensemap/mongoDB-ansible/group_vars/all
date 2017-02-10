@@ -1,6 +1,6 @@
 ---
 ntp_manage_config: yes
-ntp_area: de
+ntp_area: ".de"
 
 xfs_disk: /dev/xvdb
 xfs_disk_mountpoint: /mongo_xfs_data
