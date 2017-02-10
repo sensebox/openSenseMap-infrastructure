@@ -1,2 +1,3 @@
 .retry
 mongodb_keyfile
+hosts.ini
