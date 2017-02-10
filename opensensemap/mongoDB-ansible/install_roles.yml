@@ -1,0 +1,8 @@
+# install_roles.yml
+
+# ntp role
+- src: geerlingguy.ntp
+
+# Stouts.mongodb role from github
+- src: https://github.com/Stouts/Stouts.mongodb.git
+  version: a64cd189da8b42b0efe82ddad9759b5e17c5677f
