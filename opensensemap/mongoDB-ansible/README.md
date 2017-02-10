@@ -4,6 +4,8 @@
 - read something about read and write concerns
 - read something about replication protocol version
 
+Please be aware that this playbook does not configure a firewall and possibly sets the mongod bind ip to the ip of eth0 which possibly could be the external ip. If you're on AWS you should set correct security groups or otherwise install a firewall
+
 #### Create an inventory (For example `hosts.ini`)
 - Specify a `[mongodb]` group.
 - For AWS ubuntu add `ansible_user=ubuntu`
