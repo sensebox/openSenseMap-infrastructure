@@ -11,6 +11,7 @@
   become: yes
   roles:
     - geerlingguy.ntp
+    - tersmitten.swapfile
 
 - hosts: mongodb
   remote_user: ubuntu

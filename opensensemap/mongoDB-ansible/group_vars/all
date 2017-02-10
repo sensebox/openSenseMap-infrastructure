@@ -12,3 +12,5 @@ mongodb_conf_journal: yes
 mongodb_conf_auth: yes
 mongodb_conf_replSet: rs0
 
+swapfile_size: 512MB
+swapfile_swappiness: 1
