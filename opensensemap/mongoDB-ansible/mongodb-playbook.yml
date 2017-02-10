@@ -9,6 +9,11 @@
 
 - hosts: all
   become: yes
+  pre_tasks:
+    - name: apt-get update + upgrade
+      apt:
+        upgrade: dist
+
   roles:
     - geerlingguy.ntp
     - tersmitten.swapfile
