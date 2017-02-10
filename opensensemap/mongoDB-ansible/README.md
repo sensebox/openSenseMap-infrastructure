@@ -1,7 +1,6 @@
 # How to run this ansible playbook?
 
 ### Todo
-- let mongod only listen to internal ip
 - read something about read and write concerns
 - read something about replication protocol version
 

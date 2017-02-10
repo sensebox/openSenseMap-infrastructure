@@ -22,6 +22,9 @@
   remote_user: ubuntu
   become: yes
   pre_tasks:
+    - name: set mongodb_conf_bind_ip to {{ ansible_eth0.ipv4.address }}
+      set_fact:
+        mongodb_conf_bind_ip: "{{ ansible_eth0.ipv4.address }}"
     - name: create partition
       shell:  echo -e "o\nn\np\n1\n\n\nw" | fdisk {{ xfs_disk }} && touch /partition_created
       args:
