@@ -7,7 +7,7 @@ xfs_disk_mountpoint: /mongo_xfs_data
 
 mongodb_conf_dbpath: /mongo_xfs_data/data
 mongodb_version: "3.2.12"
-mongodb_conf_noprealloc: yes
+mongodb_conf_noprealloc: no
 mongodb_conf_journal: yes
 mongodb_conf_auth: yes
 mongodb_conf_replSet: rs0
