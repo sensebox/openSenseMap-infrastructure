@@ -86,6 +86,11 @@
         name: /etc/mongod.conf
         block: |
           keyFile = /etc/mongodb_keyfile
+    - name: set TZ env variable in /etc/environment
+      blockinfile:
+        name: /etc/environment
+        block: |
+          TZ=:/etc/localtime
     - name: restart mongod service
       systemd:
         name: mongod
