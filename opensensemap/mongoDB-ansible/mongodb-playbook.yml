@@ -77,6 +77,10 @@
         dest: /etc/systemd/system/mongod.service
         src: ./files/optimized-mongod.service
         owner: root
+    - name: set tcp keepalive to 120
+      sysctl:
+        name: net.ipv4.tcp_keepalive_time
+        value: 120
     - name: add keyfile option to /etc/mongod.conf
       blockinfile:
         name: /etc/mongod.conf
