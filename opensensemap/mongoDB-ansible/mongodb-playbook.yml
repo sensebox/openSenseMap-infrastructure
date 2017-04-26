@@ -22,7 +22,7 @@
   remote_user: ubuntu
   become: yes
   pre_tasks:
-    - name: set mongodb_conf_bind_ip to {{ ansible_eth0.ipv4.address }}
+    - name: set mongodb_conf_bind_ip to internal ip
       set_fact:
         mongodb_conf_bind_ip: "{{ ansible_eth0.ipv4.address }}"
     - name: create partition
