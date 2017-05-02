@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+MONGO_HOST=127.0.0.1
+MONGO_DB="{{ mongobackup_mongo_db }}"
+MONGO_USER="{{ mongobackup_mongo_user }}"
+MONGO_PASS="{{ mongobackup_mongo_pass }}"
+
+BACKUP_FOLDER="{{ mongobackup_webdav_folder }}"
+DAV_USER="{{ mongobackup_webdav_user }}"
+DAV_PASS="{{ mongobackup_webdav_pass }}"
+DAV_URL="{{ mongobackup_webdav_url }}"
+
+BACKUP_FILENAME="${MONGO_DB}_$(date -u +%F).gz"
+
+dav_upload () {
+  if [ -z "$1" ]
+  then
+    echo "-dav_upload: Parameter #1 is zero length.-"
+  else
+    echo "Uploading file $BACKUP_FOLDER/$1 .."
+    curl --silent --fail --retry 5 --retry-delay 10 --user "$DAV_USER:$DAV_PASS" "$DAV_URL/$BACKUP_FOLDER/$1" -XPUT --upload-file - || ( echo "uploading file $DAV_URL/$BACKUP_FOLDER/$1 failed after 5 retries" && exit 1)
+  fi
+}
+
+mongo_dump () {
+  mongodump --host "$MONGO_HOST" --db "$MONGO_DB" --username "$MONGO_USER" --password "$MONGO_PASS" --archive --gzip
+}
+
+# Logic for deciding who should make the backup
+# 1. get all members from the replicaset minus the master
+# 2. get the current day number (1-31)
+# 3. modulo number 2 by length of step 1
+# 4. compare the element at index (step 3) of the array (step 1) with the value in json me value
+
+/usr/bin/mongo --host "$MONGO_HOST" --username "$MONGO_USER" --password "$MONGO_PASS" --eval="var rs = rs.isMaster(); delete rs.localTime; delete rs.electionId; printjson(rs)" --quiet | jq -r -c ".primary as \$master | (.hosts | map(select(.!=\$master))) as \$secondaries | ( ( $(date -u +%d) | tonumber) % ( \$secondaries | length ) ) as \$day | \$secondaries[\$day] == .me" | grep true
+
+if [ $? -eq 0 ]; then
+  mongo_dump | dav_upload "$BACKUP_FILENAME"
+fi
+

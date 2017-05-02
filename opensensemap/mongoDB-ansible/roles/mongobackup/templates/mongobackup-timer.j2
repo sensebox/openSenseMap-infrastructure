@@ -1,0 +1,8 @@
+[Unit]
+Description=Perform MongoDB backup
+
+[Timer]
+OnCalendar={{ mongobackup_oncalendar }}
+
+[Install]
+WantedBy=timers.target

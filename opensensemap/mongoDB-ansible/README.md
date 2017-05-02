@@ -16,6 +16,10 @@ Please be aware that this playbook does not configure a firewall and possibly se
 #### Run
 `ansible-playbook --private-key <path to your private key> --inventory-file hosts.ini mongodb-playbook.yml`
 
+Without backup:
+
+`ansible-playbook --private-key <path to your private key> --inventory-file hosts.ini mongodb-playbook.yml --skip-tags "backup"`
+
 ### Todo
 - read something about read and write concerns
 - read something about replication protocol version

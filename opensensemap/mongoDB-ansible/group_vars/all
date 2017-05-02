@@ -3,6 +3,7 @@ ntp_manage_config: yes
 ntp_area: ".de"
 
 xfs_disk: /dev/xvdb
+xfs_disk_partition: /dev/xvdb1
 xfs_disk_mountpoint: /mongo_xfs_data
 
 mongodb_conf_dbpath: /mongo_xfs_data/data
@@ -14,3 +15,15 @@ mongodb_conf_replSet: rs0
 
 swapfile_size: 512MB
 swapfile_swappiness: 1
+
+# configuration only needed if backup is not skipped
+mongobackup_oncalendar: "daily UTC"
+
+mongobackup_webdav_url: "<your-webdav-url>"
+mongobackup_webdav_user: "<your-webdav-user>"
+mongobackup_webdav_pass: "<your-webdav-pass>"
+mongobackup_webdav_folder: "<your-webdav-folder>"
+
+mongobackup_mongo_db: "<which-db-to-backup>"
+mongobackup_mongo_user: "<user-of-the-db>"
+mongobackup_mongo_pass: "<password-of-the-user>"

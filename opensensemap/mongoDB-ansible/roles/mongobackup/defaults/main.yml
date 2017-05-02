@@ -1,0 +1,11 @@
+---
+mongobackup_oncalendar: "daily UTC"
+
+mongobackup_webdav_url: ""
+mongobackup_webdav_user: ""
+mongobackup_webdav_pass: ""
+mongobackup_webdav_folder: ""
+
+mongobackup_mongo_db: ""
+mongobackup_mongo_user: ""
+mongobackup_mongo_pass: ""

@@ -1,0 +1,9 @@
+[Unit]
+Description=Backup MongoDB to Webdav location
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /usr/local/bin/mongobackup.sh
+
+[Install]
+WantedBy=multi-user.target

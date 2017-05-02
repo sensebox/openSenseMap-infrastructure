@@ -1,0 +1,36 @@
+---
+- name: install jq
+  tags: backup
+  apt:
+    name: jq
+    update_cache: yes
+
+- name: create mongobackup bash script
+  tags: backup
+  template:
+    dest: /usr/local/bin/mongobackup.sh
+    owner: root
+    mode: "0700"
+    src: mongobackup-bash.j2
+
+- name: create mongobackup systemd timer file
+  tags: backup
+  template:
+    dest: /etc/systemd/system/mongobackup.timer
+    owner: root
+    src: mongobackup-timer.j2
+
+- name: copy mongobackup systemd unit file
+  tags: backup
+  copy:
+    dest: /etc/systemd/system/mongobackup.service
+    owner: root
+    src: mongobackup.service
+
+- name: start and enable mongobackup timer
+  tags: backup
+  systemd:
+    name: mongobackup.timer
+    enabled: yes
+    daemon_reload: yes
+    state: started
