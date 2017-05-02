@@ -7,6 +7,7 @@ MONGO_HOST=127.0.0.1
 MONGO_DB="{{ mongobackup_mongo_db }}"
 MONGO_USER="{{ mongobackup_mongo_user }}"
 MONGO_PASS="{{ mongobackup_mongo_pass }}"
+MONGO_AUTHDB="{{ mongobackup_mongo_authdb }}"
 
 BACKUP_FOLDER="{{ mongobackup_webdav_folder }}"
 DAV_USER="{{ mongobackup_webdav_user }}"
@@ -26,7 +27,7 @@ dav_upload () {
 }
 
 mongo_dump () {
-  mongodump --host "$MONGO_HOST" --db "$MONGO_DB" --username "$MONGO_USER" --password "$MONGO_PASS" --archive --gzip
+  mongodump --host "$MONGO_HOST" --db "$MONGO_DB" --username "$MONGO_USER" --password "$MONGO_PASS" --authenticationDatabase "$MONGO_AUTHDB" --archive --gzip
 }
 
 # Logic for deciding who should make the backup
@@ -35,7 +36,7 @@ mongo_dump () {
 # 3. modulo number 2 by length of step 1
 # 4. compare the element at index (step 3) of the array (step 1) with the value in json me value
 
-/usr/bin/mongo --host "$MONGO_HOST" --username "$MONGO_USER" --password "$MONGO_PASS" --eval="var rs = rs.isMaster(); delete rs.localTime; delete rs.electionId; printjson(rs)" --quiet | jq -r -c ".primary as \$master | (.hosts | map(select(.!=\$master))) as \$secondaries | ( ( $(date -u +%d) | tonumber) % ( \$secondaries | length ) ) as \$day | \$secondaries[\$day] == .me" | grep true
+/usr/bin/mongo --host "$MONGO_HOST" --eval="var rs = rs.isMaster(); delete rs.localTime; delete rs.electionId; printjson(rs)" --quiet | jq -r -c ".primary as \$master | (.hosts | map(select(.!=\$master))) as \$secondaries | ( ( $(date -u +%d) | tonumber) % ( \$secondaries | length ) ) as \$day | \$secondaries[\$day] == .me" | grep true
 
 if [ $? -eq 0 ]; then
   mongo_dump | dav_upload "$BACKUP_FILENAME"
