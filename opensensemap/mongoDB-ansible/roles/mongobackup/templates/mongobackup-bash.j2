@@ -35,10 +35,12 @@ mongo_dump () {
 # 2. get the current day number (1-31)
 # 3. modulo number 2 by length of step 1
 # 4. compare the element at index (step 3) of the array (step 1) with the value in json me value
-
+set +e
 /usr/bin/mongo --host "$MONGO_HOST" --eval="var rs = rs.isMaster(); delete rs.localTime; delete rs.electionId; printjson(rs)" --quiet | jq -r -c ".primary as \$master | (.hosts | map(select(.!=\$master))) as \$secondaries | ( ( $(date -u +%d) | tonumber) % ( \$secondaries | length ) ) as \$day | \$secondaries[\$day] == .me" | grep true
+retval=$?
+set -e
 
-if [ $? -eq 0 ]; then
+if [ $retval -eq 0 ]; then
   mongo_dump | dav_upload "$BACKUP_FILENAME"
 fi
 
