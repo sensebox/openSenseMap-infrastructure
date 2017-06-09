@@ -1,0 +1,17 @@
+---
+- name: create systemd unit file for configuring transparent hugepages
+  copy:
+    dest: /etc/systemd/system/disable-transparent-huge-pages.service
+    owner: root
+    src: disable-transparent-huge-pages.service
+- name: run systemd unit file for configuring transparent hugepages
+  systemd:
+    name: disable-transparent-huge-pages
+    daemon_reload: yes
+    enabled: yes
+    state: started
+- name: set tcp keepalive to 120
+  sysctl:
+    name: net.ipv4.tcp_keepalive_time
+    value: 120
+

@@ -1,0 +1,39 @@
+---
+- hosts: all
+  gather_facts: False
+  become: yes
+
+  tasks:
+  - name: install python 2
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+- hosts: all
+  become: yes
+  pre_tasks:
+    - name: apt-get update + upgrade
+      apt:
+        upgrade: dist
+    - name: set TZ env variable in /etc/environment
+      blockinfile:
+        name: /etc/environment
+        block: |
+          TZ=:/etc/localtime
+
+  roles:
+    - geerlingguy.ntp
+
+- hosts: mongodb
+  become: yes
+  pre_tasks:
+    - name: set mongodb_conf_bind_ip to internal ip and localhost
+      set_fact:
+        mongodb_conf_bind_ip: "{{ ansible_default_ipv4.address }},127.0.0.1"
+
+  roles:
+    - tersmitten.swapfile
+    - mongodisk
+    - mongopreconf
+    - Stouts.mongodb
+    - mongopostconf
+    - mongobackup
+

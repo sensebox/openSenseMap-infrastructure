@@ -1,0 +1,24 @@
+---
+- name: create mongodb_keyfile
+  copy:
+    dest: /etc/mongodb_keyfile
+    src: mongodb_keyfile
+    owner: mongodb
+    mode: 0400
+- name: overwrite mongod systemd unit file with optimized unit file
+  copy:
+    dest: /etc/systemd/system/mongod.service
+    src: optimized-mongod.service
+    owner: root
+- name: add keyfile option to /etc/mongod.conf
+  blockinfile:
+    name: /etc/mongod.conf
+    block: |
+      keyFile = /etc/mongodb_keyfile
+- name: restart mongod service
+  systemd:
+    name: mongod
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+

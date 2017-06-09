@@ -2,10 +2,6 @@
 ntp_manage_config: yes
 ntp_area: ".de"
 
-xfs_disk: /dev/xvdb
-xfs_disk_partition: /dev/xvdb1
-xfs_disk_mountpoint: /mongo_xfs_data
-
 mongodb_conf_dbpath: /mongo_xfs_data/data
 mongodb_version: "3.2.13"
 mongodb_conf_noprealloc: no

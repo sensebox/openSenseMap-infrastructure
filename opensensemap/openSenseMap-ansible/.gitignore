@@ -1,0 +1,6 @@
+*.retry
+mongodb_keyfile
+hosts.ini
+roles/geerlingguy.ntp
+roles/Stouts.mongodb
+roles/tersmitten.swapfile

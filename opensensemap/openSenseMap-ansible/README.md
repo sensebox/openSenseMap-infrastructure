@@ -1,11 +1,11 @@
 # How to run this ansible playbook?
 
-This playbook assumes the host has at least 2 disks of which one will be formatted with XFS. On it, the mongodb db path will live.
+This playbook assumes 2 disks for the MongoDB hosts of which one will be formatted with XFS. On it, the MongoDB db path will live.
 
 Please be aware that this playbook does not configure a firewall and possibly sets the mongod bind ip to the ip of eth0 which possibly could be the external ip. If you're on AWS you should set correct security groups or otherwise install a firewall
 
 #### Create an inventory (For example `hosts.ini`)
-- Specify a `[mongodb]` group.
+- Specify `[mongodb]` and `[webserver]` groups.
 - For AWS ubuntu add `ansible_user=ubuntu`
 
 #### Fetch playbooks
@@ -14,12 +14,9 @@ Please be aware that this playbook does not configure a firewall and possibly se
 #### Create file `files/mongodb_keyfile` in this directory
 
 #### Run
-`ansible-playbook --private-key <path to your private key> --inventory-file hosts.ini mongodb-playbook.yml`
+`ansible-playbook --private-key <path to your private key> --inventory-file hosts.ini openSenseMap-playbook.yml`
 
 Without backup:
 
-`ansible-playbook --private-key <path to your private key> --inventory-file hosts.ini mongodb-playbook.yml --skip-tags "backup"`
+`ansible-playbook --private-key <path to your private key> --inventory-file hosts.ini openSenseMap-playbook.yml --skip-tags "backup"`
 
-### Todo
-- read something about read and write concerns
-- read something about replication protocol version

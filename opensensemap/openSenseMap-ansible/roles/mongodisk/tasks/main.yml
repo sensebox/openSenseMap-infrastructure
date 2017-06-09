@@ -1,0 +1,30 @@
+---
+- name: create partition
+  shell:  echo -e "o\nn\np\n1\n\n\nw" | fdisk {{ xfs_disk }} && touch /partition_created
+  args:
+    creates: /partition_created
+- name: create xfs
+  filesystem:
+    fstype: xfs
+    dev: "{{ xfs_disk_partition }}"
+- name: mount xfs disk
+  mount:
+    state: mounted
+    fstype: xfs
+    opts: defaults,noatime,discard
+    src: "{{ xfs_disk_partition }}"
+    name: "{{ xfs_disk_mountpoint }}"
+    dump: 0
+    passno: 0
+- name: create systemd unit file for setting readahead to 0 for {{ xfs_disk }}
+  template:
+    dest: /etc/systemd/system/set-readahead.service
+    owner: root
+    src: set-readahead.service.j2
+- name: run systemd unit file for setting readahead to 0 for {{ xfs_disk }}
+  systemd:
+    name: set-readahead
+    daemon_reload: yes
+    enabled: yes
+    state: started
+
