@@ -3,7 +3,7 @@
 ## ?? (may be outdated. Look into README of respective folders)
 
 1. `cd aws-openSenseMap-terraform`
-1. Create `terraform.tfvars` with variables `aws_access_key`, `aws_secret_key`, `ssh_allowed_cidr`, `aws_key_name`
+1. Create `terraform.tfvars` with variables `aws_access_key`, `aws_secret_key`, `management_allowed_cidr`, `aws_key_name`
 1. Look at `variables.tf` and overwrite variables in file `terraform.tfvars` if you like
 1. `terraform plan`
 1. `terraform apply`

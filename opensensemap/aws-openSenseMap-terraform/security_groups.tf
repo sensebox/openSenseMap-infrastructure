@@ -1,12 +1,12 @@
 resource "aws_security_group" "ssh_unims" {
-  description = "allow ssh from ${var.ssh_allowed_cidr}"
+  description = "allow ssh from ${var.management_allowed_cidr}"
   name        = "tf_ssh_unims"
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${var.ssh_allowed_cidr}"]
+    cidr_blocks = ["${var.management_allowed_cidr}"]
   }
 
   tags {

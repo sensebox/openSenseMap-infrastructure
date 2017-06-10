@@ -27,8 +27,8 @@ variable "mongo_instance_type" {
   default     = "r4.large"
 }
 
-variable "ssh_allowed_cidr" {
-  description = "CIDR for allowed inbound SSH connections"
+variable "management_allowed_cidr" {
+  description = "CIDR for allowed inbound management connections"
 }
 
 data "aws_vpc" "default_vpc" {
