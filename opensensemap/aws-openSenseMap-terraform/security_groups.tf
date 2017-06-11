@@ -79,3 +79,20 @@ resource "aws_security_group" "opensensemap_group" {
     Name    = "tf_opensensemap_external"
   }
 }
+
+resource "aws_security_group" "docker_external" {
+  name        = "tf_docker_external"
+  description = "allow ingress traffic on tcp port 2376 for docker from ${var.management_allowed_cidr}"
+
+  ingress {
+    from_port   = 2376
+    to_port     = 2376
+    protocol    = "tcp"
+    cidr_blocks = ["${var.management_allowed_cidr}"]
+  }
+
+  tags {
+    Project = "openSenseMap"
+    Name    = "tf_docker_external"
+  }
+}
