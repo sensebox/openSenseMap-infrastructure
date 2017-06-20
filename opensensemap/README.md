@@ -1,5 +1,12 @@
 # opensensemap.org
 
+## Prerequisites
+
+- docker-machine
+- ansible
+- terraform
+- AWS Account
+
 ## ?? (may be outdated. Look into README of respective folders)
 
 1. `cd aws-openSenseMap-terraform`
