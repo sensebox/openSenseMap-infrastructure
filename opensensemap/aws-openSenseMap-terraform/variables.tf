@@ -17,6 +17,10 @@ variable "aws_key_name" {
   description = "Key name used for hosts"
 }
 
+variable "aws_key_path" {
+  description = "Path to the ssh key used for hosts"
+}
+
 variable "web_instance_type" {
   description = "instance type for web host"
   default     = "t2.medium"
