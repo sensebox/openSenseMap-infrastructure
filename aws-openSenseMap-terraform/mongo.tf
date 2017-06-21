@@ -1,5 +1,5 @@
 resource "aws_instance" "mongo_host" {
-  count = 1
+  count = 3
 
   ami                    = "${lookup(var.ami, var.aws_region)}"
   instance_type          = "${var.mongo_instance_type}"
