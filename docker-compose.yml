@@ -1,0 +1,10 @@
+cloudmanager:
+  build: .
+  container_name: cloudmanager
+  hostname: cloudmanager
+  cap_add:
+    - NET_ADMIN
+  volumes:
+    - ./infrastructure:/infrastructure:ro
+    - ./docker-entrypoint.d:/docker-entrypoint.d:ro
+    - ./workdir:/workdir
