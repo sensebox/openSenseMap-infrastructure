@@ -8,3 +8,5 @@
 ## Provision it
 1. Run `terraform output ansible_hosts_ini > ../openSenseMap-ansible/hosts.ini` and run ansible
 
+## TODO
+- DNS
