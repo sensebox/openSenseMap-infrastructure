@@ -36,7 +36,6 @@ RUN apt-get update && apt-get install -y vim tmux unzip bash-completion libffi-d
   curl -L https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash > /etc/bash_completion.d/docker-machine && \
   curl -L https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-wrapper.bash > /etc/bash_completion.d/docker-machine-wrapper && \
   curl -L https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-prompt.bash > /etc/bash_completion.d/docker-machine-prompt && \
-  echo "PS1='\u@\h \w\$(__docker_machine_ps1 " [%s]") \$ '" > /etc/profile.d/docker-machine-ps1.sh && \
   curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64" && \
   chmod +x /usr/local/bin/gosu
 
