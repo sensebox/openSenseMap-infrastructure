@@ -12,12 +12,4 @@ export HOME=/home/user
 
 chown -R user /workdir
 
-# taken from official postgres docker entrypoint
-for f in /docker-entrypoint.d/*; do
-  case "$f" in
-    *.sh)     echo "$0: running $f"; . "$f" ;;
-  esac
-  echo
-done
-
 exec /usr/local/bin/gosu user "$@"
