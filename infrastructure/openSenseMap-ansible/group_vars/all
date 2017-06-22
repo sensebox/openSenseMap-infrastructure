@@ -3,7 +3,7 @@ ntp_manage_config: yes
 ntp_area: ".de"
 
 mongodb_conf_dbpath: /mongo_xfs_data/data
-mongodb_version: "3.2.13"
+mongodb_version: "3.2.14"
 mongodb_conf_noprealloc: no
 mongodb_conf_journal: yes
 mongodb_conf_auth: yes
