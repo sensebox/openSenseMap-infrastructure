@@ -31,6 +31,16 @@ variable "mongo_instance_type" {
   default     = "r4.large"
 }
 
+variable "mongo_volume" {
+  type = "map"
+
+  default = {
+    volume_type = "io1"
+    volume_size = 40
+    iops        = 1000
+  }
+}
+
 variable "management_allowed_cidr" {
   description = "CIDR for allowed inbound management connections"
 }

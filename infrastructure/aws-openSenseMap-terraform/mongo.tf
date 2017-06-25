@@ -8,9 +8,9 @@ resource "aws_instance" "mongo_host" {
   key_name               = "${var.aws_key_name}"
 
   ebs_block_device {
-    volume_type           = "io1"
-    volume_size           = 40
-    iops                  = 1000
+    volume_type           = "${var.mongo_volume["volume_type"]}"
+    volume_size           = "${var.mongo_volume["volume_size"]}"
+    iops                  = "${var.mongo_volume["iops"]}"
     delete_on_termination = false
     device_name           = "/dev/xvdb"
   }
