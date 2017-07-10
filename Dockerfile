@@ -4,6 +4,7 @@ ENV DOCKER_MACHINE_VERSION=0.12.1 \
   DOCKER_COMPOSE_VERSION=1.14.0 \
   DOCKER_VERSION=17.05.0 \
   TERRAFORM_VERSION=0.9.11 \
+  ANSIBLE_VERSION=2.3.1.0 \
   MACHINE_STORAGE_PATH=/workdir/docker-machine_storage \
   TERM=xterm-256color \
   SHELL=/bin/bash
@@ -30,7 +31,7 @@ RUN apt-get update && apt-get install -y vim tmux unzip bash-completion libffi-d
   curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-$DOCKER_VERSION-ce.tgz && \
   tar --strip-components=1 -xvzf docker-$DOCKER_VERSION-ce.tgz -C /usr/local/bin && \
   rm docker-$DOCKER_VERSION-ce.tgz && \
-  pip install ansible && \
+  pip install ansible==$ANSIBLE_VERSION && \
   apt-get purge -y --auto-remove unzip build-essential && \
   curl -L https://raw.githubusercontent.com/docker/cli/306212574afc78d36036a10ab158363ea81db6bc/contrib/completion/bash/docker > /etc/bash_completion.d/docker && \
   curl -L https://raw.githubusercontent.com/docker/machine/9e92ef1af47bda3bdc95faf3b7c18ae00b68d16d/contrib/completion/bash/docker-machine.bash > /etc/bash_completion.d/docker-machine && \
