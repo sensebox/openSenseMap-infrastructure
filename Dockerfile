@@ -40,11 +40,11 @@ RUN apt-get update && apt-get install -y vim tmux unzip bash-completion libffi-d
   curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64" && \
   chmod +x /usr/local/bin/gosu
 
-COPY docker-entrypoint.sh /usr/local/bin/entrypoint.sh
-
 WORKDIR /workdir
 
 VOLUME ["/workdir"]
+
+COPY docker-entrypoint.sh /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
