@@ -1,9 +1,9 @@
 FROM buildpack-deps:stretch-scm
 
-ENV DOCKER_MACHINE_VERSION=0.12.0 \
+ENV DOCKER_MACHINE_VERSION=0.12.1 \
   DOCKER_COMPOSE_VERSION=1.14.0 \
   DOCKER_VERSION=17.05.0 \
-  TERRAFORM_VERSION=0.9.8 \
+  TERRAFORM_VERSION=0.9.11 \
   MACHINE_STORAGE_PATH=/workdir/docker-machine_storage \
   TERM=xterm-256color \
   SHELL=/bin/bash
