@@ -32,10 +32,10 @@ RUN apt-get update && apt-get install -y vim tmux unzip bash-completion libffi-d
   rm docker-$DOCKER_VERSION-ce.tgz && \
   pip install ansible && \
   apt-get purge -y --auto-remove unzip build-essential && \
-  curl -L https://raw.githubusercontent.com/docker/docker-ce/master/components/engine/contrib/completion/bash/docker > /etc/bash_completion.d/docker && \
-  curl -L https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash > /etc/bash_completion.d/docker-machine && \
-  curl -L https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-wrapper.bash > /etc/bash_completion.d/docker-machine-wrapper && \
-  curl -L https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine-prompt.bash > /etc/bash_completion.d/docker-machine-prompt && \
+  curl -L https://raw.githubusercontent.com/docker/cli/306212574afc78d36036a10ab158363ea81db6bc/contrib/completion/bash/docker > /etc/bash_completion.d/docker && \
+  curl -L https://raw.githubusercontent.com/docker/machine/9e92ef1af47bda3bdc95faf3b7c18ae00b68d16d/contrib/completion/bash/docker-machine.bash > /etc/bash_completion.d/docker-machine && \
+  curl -L https://raw.githubusercontent.com/docker/machine/464e19ba1cf83cc1babb30eff3ecde24b2e79567/contrib/completion/bash/docker-machine-wrapper.bash > /etc/bash_completion.d/docker-machine-wrapper && \
+  curl -L https://raw.githubusercontent.com/docker/machine/5707b38a9ef35a21f55b1390f4ac476c3d4b84e1/contrib/completion/bash/docker-machine-prompt.bash > /etc/bash_completion.d/docker-machine-prompt && \
   curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64" && \
   chmod +x /usr/local/bin/gosu
 
