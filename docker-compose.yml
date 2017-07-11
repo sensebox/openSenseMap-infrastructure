@@ -3,5 +3,5 @@ cloudmanager:
   container_name: cloudmanager
   hostname: cloudmanager
   volumes:
-    - ./infrastructure:/infrastructure:ro
+    - ./infrastructure:/infrastructure
     - ./workdir:/workdir

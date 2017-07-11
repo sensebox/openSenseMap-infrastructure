@@ -19,6 +19,6 @@ if [ -f /workdir/ssh_config ]; then
   ln -s /workdir/ssh_config /etc/ssh/ssh_config
 fi
 
-chown -R user /workdir
+chown -R user /workdir /infrastructure
 
 exec /usr/local/bin/gosu user "$@"
