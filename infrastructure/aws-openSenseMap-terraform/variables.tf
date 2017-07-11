@@ -9,7 +9,7 @@ variable "ami" {
   description = "AMI used for mongoDB hosts"
 
   default = {
-    "eu-central-1" = "ami-1b4d9e74"
+    "eu-central-1" = "ami-1c45e273"
   }
 }
 
