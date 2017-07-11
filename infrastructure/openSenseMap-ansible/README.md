@@ -13,10 +13,13 @@ Please be aware that this playbook does not configure a firewall and possibly se
 
 #### Create file `files/mongodb_keyfile` in this directory
 
+#### Create configuration yml file
+- Copy `group_vars/all` to `ansible_vars.yml`
+
 #### Run
-`ansible-playbook --private-key <path to your private key> --inventory-file hosts.ini openSenseMap-playbook.yml`
+`ansible-playbook --private-key <path to your private key> --inventory-file hosts.ini --extra-vars="vars_file=ansible_vars.yml" openSenseMap-playbook.yml`
 
 Without backup:
 
-`ansible-playbook --private-key <path to your private key> --inventory-file hosts.ini openSenseMap-playbook.yml --skip-tags "backup"`
+`ansible-playbook --private-key <path to your private key> --inventory-file hosts.ini --extra-vars="vars_file=ansible_vars.yml" openSenseMap-playbook.yml --skip-tags "backup"`
 

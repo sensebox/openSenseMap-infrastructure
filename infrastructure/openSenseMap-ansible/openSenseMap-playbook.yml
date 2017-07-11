@@ -1,5 +1,7 @@
 ---
 - hosts: all
+  vars_files:
+    - "{{ vars_file }}"
   gather_facts: False
   become: yes
 
@@ -23,6 +25,8 @@
     - geerlingguy.ntp
 
 - hosts: mongodb
+  vars_files:
+    - "{{ vars_file }}"
   become: yes
   pre_tasks:
     - name: set mongodb_conf_bind_ip to internal ip and localhost
