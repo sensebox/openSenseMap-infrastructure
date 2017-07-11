@@ -1,5 +1,5 @@
 resource "aws_instance" "web" {
-  count = 1
+  count = "${var.web_enabled ? 1 : 0}"
 
   ami                    = "${lookup(var.ami, var.aws_region)}"
   instance_type          = "${var.web_instance_type}"

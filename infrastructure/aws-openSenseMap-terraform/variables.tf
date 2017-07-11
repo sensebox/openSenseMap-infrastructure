@@ -45,6 +45,16 @@ variable "management_allowed_cidr" {
   description = "CIDR for allowed inbound management connections"
 }
 
+variable "mongo_enabled" {
+  description = "controls if mongo hosts will be created. If true, 3 hosts will be created."
+  default = true
+}
+
+variable "web_enabled" {
+  description = "controls if web host will be created."
+  default = true
+}
+
 data "aws_vpc" "default_vpc" {
   default = true
 }
