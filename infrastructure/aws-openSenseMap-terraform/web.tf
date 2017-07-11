@@ -20,7 +20,7 @@ EOF
   }
 
   provisioner "local-exec" {
-    when = "destroy"
+    when    = "destroy"
     command = "docker-machine rm -f -y opensensemap-web"
   }
 

@@ -47,12 +47,12 @@ variable "management_allowed_cidr" {
 
 variable "mongo_enabled" {
   description = "controls if mongo hosts will be created. If true, 3 hosts will be created."
-  default = true
+  default     = true
 }
 
 variable "web_enabled" {
   description = "controls if web host will be created."
-  default = true
+  default     = true
 }
 
 data "aws_vpc" "default_vpc" {
