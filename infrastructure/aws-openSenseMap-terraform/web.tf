@@ -19,6 +19,11 @@ docker-machine create \
 EOF
   }
 
+  provisioner "local-exec" {
+    when = "destroy"
+    command = "docker-machine rm -f -y opensensemap-web"
+  }
+
   tags {
     Name    = "web"
     Project = "openSenseMap"
