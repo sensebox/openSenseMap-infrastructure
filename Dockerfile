@@ -9,6 +9,16 @@ ENV DOCKER_MACHINE_VERSION=0.12.1 \
   TERM=xterm-256color \
   SHELL=/bin/bash
 
+# set up locale
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales --no-install-recommends && \
+  sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+  dpkg-reconfigure --frontend=noninteractive locales && \
+  update-locale LANG=en_US.UTF-8
+
+ENV LANG=en_US.UTF-8 \
+  LANGUAGE=en_US:en \
+  LC_ALL=en_US.UTF-8
+
 # installs
 # docker
 # docker-machine
