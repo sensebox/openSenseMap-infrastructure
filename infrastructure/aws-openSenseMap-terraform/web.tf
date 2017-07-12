@@ -7,6 +7,11 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = ["${aws_security_group.allow_all_outbound.id}", "${aws_security_group.ssh_unims.id}", "${aws_security_group.mongo_internal.id}", "${aws_security_group.docker_external.id}"]
   key_name               = "${var.aws_key_name}"
 
+  root_block_device {
+    volume_size = "40"
+    volume_type = "gp2"
+  }
+
   provisioner "local-exec" {
     command = <<EOF
 docker-machine create \
