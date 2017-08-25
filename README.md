@@ -12,11 +12,3 @@ You should always use `./start.sh` to run this container to ensure the files in 
 
 The directory `workdir` can be used for your own configuration files.
 
-If you want to connect to an openconnect/anyconnect vpn, you can create a file in `docker-entrypoint.d` with the following content:
-```bash
-#!/bin/bash
-
-set -e
-
-openconnect --background --quiet --setuid user <vpn address>
-```
