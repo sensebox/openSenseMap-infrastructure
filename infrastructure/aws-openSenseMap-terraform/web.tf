@@ -35,9 +35,7 @@ EOF
   }
 }
 
-/*
 resource "aws_eip" "elastic_ip_web" {
   instance = "${aws_instance.web.id}"
-  vpc = true
+  vpc      = true
 }
-*/
