@@ -7,7 +7,7 @@ resource "aws_route53_record" "testing_root" {
   name    = "${var.testing_dns_root_domain}"
   type    = "A"
   ttl     = "300"
-  records = ["${aws_instance.testing.public_ip}"]
+  records = ["${aws_eip.elastic_ip_testing.public_ip}"]
 }
 
 resource "aws_route53_record" "testing_www" {
@@ -15,7 +15,7 @@ resource "aws_route53_record" "testing_www" {
   name    = "www.${var.testing_dns_root_domain}"
   type    = "A"
   ttl     = "300"
-  records = ["${aws_instance.testing.public_ip}"]
+  records = ["${aws_eip.elastic_ip_testing.public_ip}"]
 }
 
 resource "aws_route53_record" "testing_api" {
@@ -23,7 +23,7 @@ resource "aws_route53_record" "testing_api" {
   name    = "api.${var.testing_dns_root_domain}"
   type    = "A"
   ttl     = "300"
-  records = ["${aws_instance.testing.public_ip}"]
+  records = ["${aws_eip.elastic_ip_testing.public_ip}"]
 }
 
 resource "aws_route53_record" "testing_ingress" {
@@ -31,7 +31,7 @@ resource "aws_route53_record" "testing_ingress" {
   name    = "ingress.${var.testing_dns_root_domain}"
   type    = "A"
   ttl     = "300"
-  records = ["${aws_instance.testing.public_ip}"]
+  records = ["${aws_eip.elastic_ip_testing.public_ip}"]
 }
 
 resource "aws_route53_record" "testing_ttn" {
@@ -39,5 +39,13 @@ resource "aws_route53_record" "testing_ttn" {
   name    = "ttn-integration.${var.testing_dns_root_domain}"
   type    = "A"
   ttl     = "300"
-  records = ["${aws_instance.testing.public_ip}"]
+  records = ["${aws_eip.elastic_ip_testing.public_ip}"]
+}
+
+resource "aws_route53_record" "testing_internet-test" {
+  zone_id = "${aws_route53_zone.testing_zone.zone_id}"
+  name    = "internet-test.${var.testing_dns_root_domain}"
+  type    = "A"
+  ttl     = "300"
+  records = ["${aws_eip.elastic_ip_testing.public_ip}"]
 }
