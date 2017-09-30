@@ -15,20 +15,22 @@ DAV_PASS="{{ mongobackup_webdav_pass }}"
 DAV_URL="{{ mongobackup_webdav_url }}"
 
 BACKUP_FILENAME="${MONGO_DB}_$(date -u +%F).gz"
+TMP_FILENAME="$(mktemp -t $BACKUP_FILENAME.XXXXXXXX)"
 
 dav_upload () {
-  if [ -z "$1" ]
-  then
-    echo "-dav_upload: Parameter #1 is zero length.-"
-  else
-    echo "Uploading file $BACKUP_FOLDER/$1 .."
-    curl --silent --fail --retry 5 --retry-delay 10 --user "$DAV_USER:$DAV_PASS" "$DAV_URL/$BACKUP_FOLDER/$1" -XPUT --upload-file - || ( echo "uploading file $DAV_URL/$BACKUP_FOLDER/$1 failed after 5 retries" && exit 1)
-  fi
+  echo "Uploading file $BACKUP_FOLDER/$BACKUP_FILENAME .."
+  curl --silent --fail --retry 5 --retry-delay 10 --user "$DAV_USER:$DAV_PASS" "$DAV_URL/$BACKUP_FOLDER/$BACKUP_FILENAME" -XPUT --upload-file "$TMP_FILENAME" || ( echo "uploading file $BACKUP_FOLDER/$BACKUP_FILENAME failed after 5 retries" && exit 1)
 }
 
 mongo_dump () {
-  mongodump --host "$MONGO_HOST" --db "$MONGO_DB" --username "$MONGO_USER" --password "$MONGO_PASS" --authenticationDatabase "$MONGO_AUTHDB" --archive --gzip
+  mongodump --host "$MONGO_HOST" --db "$MONGO_DB" --username "$MONGO_USER" --password "$MONGO_PASS" --authenticationDatabase "$MONGO_AUTHDB" --archive="$TMP_FILENAME" --gzip
 }
+
+cleanup () {
+  rm -rf "$TMP_FILENAME"
+}
+
+trap cleanup EXIT
 
 # Logic for deciding who should make the backup
 # 1. get all members from the replicaset minus the master
@@ -41,6 +43,6 @@ retval=$?
 set -e
 
 if [ $retval -eq 0 ]; then
-  mongo_dump | dav_upload "$BACKUP_FILENAME"
+  mongo_dump && dav_upload
 fi
 
