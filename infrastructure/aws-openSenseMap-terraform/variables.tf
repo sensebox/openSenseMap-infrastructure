@@ -13,6 +13,14 @@ variable "ami" {
   }
 }
 
+variable "ami_v2" {
+  description = "AMI used for mongoDB hosts"
+
+  default = {
+    "eu-central-1" = "ami-5a922335"
+  }
+}
+
 variable "aws_key_name" {
   description = "Key name used for hosts"
 }
@@ -37,6 +45,16 @@ variable "mongo_volume" {
   default = {
     volume_type = "io1"
     volume_size = 40
+    iops        = 1000
+  }
+}
+
+variable "mongo_volume_v2" {
+  type = "map"
+
+  default = {
+    volume_type = "io1"
+    volume_size = 80
     iops        = 1000
   }
 }
