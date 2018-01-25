@@ -19,6 +19,12 @@ if [ -f /workdir/ssh_config ]; then
   ln -s /workdir/ssh_config /etc/ssh/ssh_config
 fi
 
+# symlink /workdir/docker_config.json to ~/.docker/config.json if it exits
+if [ -f /workdir/docker_config.json ]; then
+  mkdir -p "$HOME/.docker"
+  ln -s /workdir/docker_config.json "$HOME/.docker/config.json"
+fi
+
 chown -R user /workdir /infrastructure
 
 exec /usr/local/bin/gosu user "$@"
