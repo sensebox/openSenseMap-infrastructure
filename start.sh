@@ -4,7 +4,8 @@ WORKDIR="$(pwd)/workdir"
 
 echo "updating workdir ..."
 
-git -C workdir pull origin master
+echo "git -C ${WORKDIR} pull origin master"
+git -C "${WORKDIR}" pull origin master
 
 docker-compose run --rm -e LOCAL_USER_ID="$(id -u $USER)" cloudmanager
 
