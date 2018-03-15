@@ -9,6 +9,14 @@ variable "ami" {
   description = "AMI used for mongoDB hosts"
 
   default = {
+    "eu-central-1" = "ami-7c412f13"
+  }
+}
+
+variable "ami_web" {
+  description = "AMI used for mongoDB hosts"
+
+  default = {
     "eu-central-1" = "ami-1c45e273"
   }
 }
@@ -35,6 +43,11 @@ variable "web_instance_type" {
 }
 
 variable "mongo_instance_type" {
+  description = "instance type for mongoDB hosts"
+  default     = "r4.xlarge"
+}
+
+variable "mongo_instance_type_v2" {
   description = "instance type for mongoDB hosts"
   default     = "r4.large"
 }
