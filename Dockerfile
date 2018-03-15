@@ -10,7 +10,7 @@ ENV DOCKER_MACHINE_VERSION=0.13.0 \
   SHELL=/bin/bash
 
 # set up locale
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales vim tmux bash-completion --no-install-recommends && \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales vim tmux bash-completion nano less --no-install-recommends && \
   sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
   dpkg-reconfigure --frontend=noninteractive locales && \
   update-locale LANG=en_US.UTF-8 && \
