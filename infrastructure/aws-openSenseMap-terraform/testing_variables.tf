@@ -2,7 +2,7 @@ variable "testing_ami" {
   description = "AMI used for testing host"
 
   default = {
-    "eu-central-1" = "ami-9c1db3f3"
+    "eu-central-1" = "ami-cd491726"
   }
 }
 

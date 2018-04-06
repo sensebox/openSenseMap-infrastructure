@@ -12,22 +12,23 @@ resource "aws_instance" "testing" {
     volume_type = "gp2"
   }
 
-  //  provisioner "local-exec" {
-  //    command = <<EOF
-  //docker-machine create \
-  //  --driver generic \
-  //  --generic-ip-address ${aws_eip.elastic_ip_testing.ip} \
-  //  --generic-ssh-user ubuntu \
-  //  --generic-ssh-key ${var.aws_key_path} \
-  //  --engine-storage-driver overlay2 \
-  //  opensensemap-testing
-  //EOF
-  //  }
-  //
-  //  provisioner "local-exec" {
-  //    when    = "destroy"
-  //    command = "docker-machine rm -f -y opensensemap-testing"
-  //  }
+  #   provisioner "local-exec" {
+  #     command = <<EOF
+  # docker-machine create \
+  #   --driver generic \
+  #   --generic-ip-address ${aws_instance.testing.public_ip} \
+  #   --generic-ssh-user ubuntu \
+  #   --generic-ssh-key ${var.aws_key_path} \
+  #   --engine-storage-driver overlay2 \
+  #   opensensemap-testing
+  # EOF
+  #   }
+
+
+  #   provisioner "local-exec" {
+  #     when    = "destroy"
+  #     command = "docker-machine rm -f -y opensensemap-testing"
+  #   }
 
   tags {
     Name    = "testing"

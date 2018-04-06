@@ -47,27 +47,12 @@ variable "mongo_instance_type" {
   default     = "r4.xlarge"
 }
 
-variable "mongo_instance_type_v2" {
-  description = "instance type for mongoDB hosts"
-  default     = "r4.large"
-}
-
 variable "mongo_volume" {
   type = "map"
 
   default = {
     volume_type = "io1"
     volume_size = 40
-    iops        = 1000
-  }
-}
-
-variable "mongo_volume_v2" {
-  type = "map"
-
-  default = {
-    volume_type = "io1"
-    volume_size = 80
     iops        = 1000
   }
 }
