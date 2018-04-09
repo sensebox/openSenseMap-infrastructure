@@ -13,22 +13,6 @@ variable "ami" {
   }
 }
 
-variable "ami_web" {
-  description = "AMI used for mongoDB hosts"
-
-  default = {
-    "eu-central-1" = "ami-1c45e273"
-  }
-}
-
-variable "ami_v2" {
-  description = "AMI used for mongoDB hosts"
-
-  default = {
-    "eu-central-1" = "ami-5a922335"
-  }
-}
-
 variable "aws_key_name" {
   description = "Key name used for hosts"
 }
