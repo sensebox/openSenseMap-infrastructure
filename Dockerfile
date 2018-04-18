@@ -5,6 +5,7 @@ ENV DOCKER_MACHINE_VERSION=0.13.0 \
   DOCKER_VERSION=17.12.0 \
   TERRAFORM_VERSION=0.9.11 \
   ANSIBLE_VERSION=2.3.1.0 \
+  PACKER_VERSION=1.2.2 \
   MACHINE_STORAGE_PATH=/workdir/docker-machine_storage \
   TERM=xterm-256color \
   SHELL=/bin/bash
@@ -26,6 +27,7 @@ ENV LANG=en_US.UTF-8 \
 # docker-compose
 # terraform
 # ansible
+# packer
 # bash-completion
 # gosu
 # vim
@@ -38,8 +40,11 @@ RUN curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_
 
 RUN apt-get update && apt-get install -y unzip --no-install-recommends && \
   curl -L -o terraform.zip https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+  curl -L -o packer.zip https://releases.hashicorp.com/packer/$PACKER_VERSION/packer_${PACKER_VERSION}_linux_amd64.zip && \
   unzip terraform.zip terraform -d /usr/local/bin && \
+  unzip packer.zip packer -d /usr/local/bin && \
   rm -rf terraform.zip && \
+  rm -rf packer.zip && \
   apt-get purge -y --auto-remove unzip && \
   rm -rf /var/lib/apt/lists/*
 
