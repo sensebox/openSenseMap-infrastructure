@@ -39,4 +39,8 @@ resource "aws_instance" "testing" {
 resource "aws_eip" "elastic_ip_testing" {
   instance = "${aws_instance.testing.id}"
   vpc      = true
+
+  tags {
+    Name = "testing"
+  }
 }

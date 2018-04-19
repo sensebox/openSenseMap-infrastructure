@@ -96,3 +96,22 @@ resource "aws_security_group" "docker_external" {
     Name    = "tf_docker_external"
   }
 }
+
+resource "aws_security_group" "blockly_compiler" {
+  name        = "tf_blockly_compiler"
+  description = "allow ingress traffic on tcp ports 80 and 443"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
