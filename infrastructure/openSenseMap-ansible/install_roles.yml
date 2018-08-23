@@ -10,3 +10,7 @@
 
 # swapfile role
 - src: tersmitten.swapfile
+
+# AWS Monitoring Memory and Disk Metrics role from github
+- src: https://github.com/Restless-ET/ansible-role-aws-scripts-mon.git
+  version: 98d251f5946e8028357b33b8a79d74bebcb2c063

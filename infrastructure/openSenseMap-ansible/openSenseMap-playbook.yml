@@ -40,4 +40,4 @@
     - Stouts.mongodb
     - mongopostconf
     - mongobackup
-
+    - ansible-role-aws-scripts-mon

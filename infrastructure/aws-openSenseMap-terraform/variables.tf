@@ -13,6 +13,14 @@ variable "ami" {
   }
 }
 
+variable "ami_mongodb_new" {
+  description = "AMI used for mongoDB hosts"
+
+  default = {
+    "eu-central-1" = "ami-027583e616ca104df"
+  }
+}
+
 variable "aws_key_name" {
   description = "Key name used for hosts"
 }
@@ -29,6 +37,11 @@ variable "web_instance_type" {
 variable "mongo_instance_type" {
   description = "instance type for mongoDB hosts"
   default     = "r4.xlarge"
+}
+
+variable "mongo_instance_type_new" {
+  description = "instance type for mongoDB hosts"
+  default     = "r4.2xlarge"
 }
 
 variable "mongo_volume" {
