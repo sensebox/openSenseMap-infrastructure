@@ -23,6 +23,7 @@
 
   roles:
     - geerlingguy.ntp
+    - ansible-role-aws-scripts-mon
 
 - hosts: mongodb
   vars_files:

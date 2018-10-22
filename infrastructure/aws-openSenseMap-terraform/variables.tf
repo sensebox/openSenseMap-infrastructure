@@ -34,6 +34,19 @@ variable "web_instance_type" {
   default     = "t2.medium"
 }
 
+variable "web_ec2_instance_type" {
+  description = "instance type for web host"
+  default     = "t3.large"
+}
+
+variable "web_ami" {
+  description = "AMI used for web host"
+
+  default = {
+    "eu-central-1" = "ami-0bdf93799014acdc4"
+  }
+}
+
 variable "mongo_instance_type" {
   description = "instance type for mongoDB hosts"
   default     = "r4.xlarge"

@@ -10,21 +10,21 @@
     "region": "eu-central-1",
     "source_ami_filter": {
       "filters": {
-        "virtualization-type": "hvm",
-        "name": "ubuntu/images/*ubuntu-bionic-18.04-amd64-server-*",
-        "root-device-type": "ebs"
+      "virtualization-type": "hvm",
+      "name": "ubuntu/images/*ubuntu-bionic-18.04-amd64-server-*",
+      "root-device-type": "ebs"
       },
       "owners": ["099720109477"],
       "most_recent": true
     },
     "instance_type": "t2.micro",
     "ssh_username": "ubuntu",
-    "ami_name": "sensebox-blockly-compiler-{{timestamp}}-development"
+    "ami_name": "ubuntu-docker-{{timestamp}}"
   }],
   "provisioners": [
     {
       "type": "file",
-      "source": "../../workdir/compose/production/blockly-compiler",
+      "source": "./",
       "destination": "/home/ubuntu"
     },
     {
@@ -34,12 +34,8 @@
         "curl -fsSL get.docker.com -o get-docker.sh",
         "sh get-docker.sh",
         "sudo usermod -aG docker ubuntu",
-        "sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose",
+        "sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose",
         "sudo chmod +x /usr/local/bin/docker-compose",
-        "cd /home/ubuntu/blockly-compiler",
-        "ls -la",
-        "sudo docker-compose pull",
-        "sudo docker-compose build",
         "sudo cp docker-compose.service /etc/systemd/system/docker-compose.service",
         "sudo cp docker-compose-reload.timer /etc/systemd/system/docker-compose-reload.timer",
         "sudo cp docker-compose-reload.service /etc/systemd/system/docker-compose-reload.service",
