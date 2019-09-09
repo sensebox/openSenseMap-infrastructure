@@ -23,7 +23,7 @@
 
   roles:
     - geerlingguy.ntp
-    - ansible-role-aws-scripts-mon
+    # - ansible-role-aws-scripts-mon
 
 - hosts: mongodb
   vars_files:
@@ -41,4 +41,4 @@
     - Stouts.mongodb
     - mongopostconf
     - mongobackup
-    - ansible-role-aws-scripts-mon
+    # - ansible-role-aws-scripts-mon

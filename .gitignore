@@ -1,2 +1,3 @@
 workdir
 docker-entrypoint.d
+infrastructure/openstack-opensensemap-terraform/main.tf
