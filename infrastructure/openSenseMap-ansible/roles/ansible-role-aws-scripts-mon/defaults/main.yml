@@ -1,7 +1,0 @@
----
-aws_scripts_mon_base_directory: /opt
-aws_scripts_mon_cron_user: "{{ ansible_user }}"
-aws_scripts_mon_options: "--mem-util --mem-used --memory-units=gigabytes --disk-space-util --disk-space-used --disk-space-units=gigabytes --disk-path=/"
-aws_scripts_mon_access_key: "AKIAIZY2O5ZDEBAB5MRQ"
-aws_scripts_mon_secret_key: "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"
-aws_scripts_mon_use_iam: false

@@ -1,4 +1,5 @@
 cloudmanager:
+  # image: cloudmanager:latest
   build: .
   container_name: cloudmanager
   hostname: cloudmanager

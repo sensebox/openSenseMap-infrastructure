@@ -35,7 +35,7 @@
         mongodb_conf_bind_ip: "{{ ansible_default_ipv4.address }},127.0.0.1"
 
   roles:
-    - tersmitten.swapfile
+    - oefenweb.swapfile
     - mongodisk
     - mongopreconf
     - Stouts.mongodb
