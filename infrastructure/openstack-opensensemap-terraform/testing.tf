@@ -28,7 +28,7 @@ resource "openstack_compute_instance_v2" "osem_testing" {
 
   network {
     uuid = "${openstack_networking_subnet_v2.internal-subnet.network_id}"
-    name = "osem-external"
+    name = "osem-internal"
   }
 }
  
