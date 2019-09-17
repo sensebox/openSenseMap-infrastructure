@@ -7,16 +7,12 @@ resource "openstack_compute_instance_v2" "bastion" {
   key_pair  = "${var.bastion_keypair}"
   security_groups = ["${openstack_compute_secgroup_v2.ssh_to_bastion.name}"]
 
-  #depends_on = ["openstack_networking_subnet_v2.external-subnet"]
+  depends_on = ["openstack_networking_subnet_v2.internal-subnet"]
 
   network {
     uuid = "${openstack_networking_network_v2.internal.id}"
     name = "osem-internal"
   }
-  # network {
-  #   uuid = "${openstack_networking_subnet_v2.external-subnet.network_id}"
-  #   name = "osem-external"
-  # }
 }
  
 # Create volume

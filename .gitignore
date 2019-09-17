@@ -1,3 +1,4 @@
 workdir
 docker-entrypoint.d
 infrastructure/openstack-opensensemap-terraform/main.tf
+infrastructure/openstack-opensensemap-terraform/bastion/main.tf

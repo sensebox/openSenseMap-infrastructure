@@ -5,10 +5,10 @@ resource "openstack_compute_instance_v2" "osem_testing" {
   flavor_id = "${var.testing_flavor}"
   image_id  = "${var.ubuntu18_image_id}"
   key_pair  = "${var.openstack_osem_keypair}"
-  security_groups = ["${openstack_compute_secgroup_v2.osem_http.id}", "${openstack_compute_secgroup_v2.ssh_from_bastion.id}"]
+  security_groups = ["${openstack_compute_secgroup_v2.osem_http.name}", "${openstack_compute_secgroup_v2.ssh_from_bastion.name}"]
   
   network {
-    uuid = "${openstack_networking_subnet_v2.external-subnet.network_id}"
+    uuid = "${openstack_networking_subnet_v2.internal-subnet.network_id}"
     name = "osem-external"
   }
 }

@@ -5,9 +5,9 @@ resource "openstack_compute_instance_v2" "blockly" {
   name      = "blockly"
   key_pair  = "${var.openstack_osem_keypair}"
   image_id  = "${var.ubuntu18_image_id}"
-  security_groups = ["${openstack_compute_secgroup_v2.osem_http.id}", "${openstack_compute_secgroup_v2.ssh_from_bastion.id}"]
+  security_groups = ["${openstack_compute_secgroup_v2.osem_http.name}", "${openstack_compute_secgroup_v2.ssh_from_bastion.name}"]
 
-  depends_on = ["openstack_networking_subnet_v2.external-subnet"]
+  depends_on = ["openstack_networking_subnet_v2.internal-subnet"]
 
   #   provisioner "local-exec" {
   #     command = <<EOF
@@ -15,7 +15,7 @@ resource "openstack_compute_instance_v2" "blockly" {
   #   --driver generic \
   #   --generic-ip-address ${openstack_compute_instance_v2.web.public_ip} \
   #   --generic-ssh-user ubuntu \
-  #   --generic-ssh-key ${var.aws_key_path} \
+  #   --generic-ssh-key ${var.openstack_osem_keypair} \
   #   --engine-storage-driver overlay2 \
   #   --engine-opt log-driver=journald \
   #   opensensemap-web
@@ -23,8 +23,8 @@ resource "openstack_compute_instance_v2" "blockly" {
   #   }
     
   network {
-    uuid = "${openstack_networking_subnet_v2.external-subnet.network_id}"
-    name = "osem-external"
+    uuid = "${openstack_networking_subnet_v2.internal-subnet.network_id}"
+    name = "osem-internal"
   }
  
 }
