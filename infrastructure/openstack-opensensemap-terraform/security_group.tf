@@ -88,6 +88,17 @@ resource "openstack_compute_secgroup_v2" "docker_external" {
     cidr          = "${var.management_allowed_cidr}"
   }
 }
+resource "openstack_compute_secgroup_v2" "prometheus_internal" {
+  name        = "tf_prom_internal"
+  description = "allow ingress traffic on tcp port 9100 for prometheus from ${var.management_allowed_cidr}"
+
+  rule {
+    from_port     = 9100
+    to_port       = 9100
+    ip_protocol   = "tcp"
+    cidr          = "${var.management_allowed_cidr}"
+  }
+}
 
 resource "openstack_compute_secgroup_v2" "blockly_compiler" {
   name        = "tf_blockly_compiler"

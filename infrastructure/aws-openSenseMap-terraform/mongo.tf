@@ -32,7 +32,8 @@ resource "aws_instance" "mongo_host_new" {
   ami                    = "${lookup(var.ami_mongodb_new, var.aws_region)}"
   instance_type          = "${var.mongo_instance_type_new}"
   subnet_id              = "${element(data.aws_subnet_ids.opensensemap_subnets.ids, count.index % 2)}"
-  vpc_security_group_ids = ["${aws_security_group.allow_all_outbound.id}", "${aws_security_group.ssh_unims.id}", "${aws_security_group.mongo_internal.id}"]
+  vpc_security_group_ids = ["${aws_security_group.allow_all_outbound.id}", "${aws_security_group.ssh_unims.id}", 
+  "${aws_security_group.mongo_internal.id}", "${aws_security_group.prometheus_internal.id}"]
   key_name               = "${var.aws_key_name}"
 
   root_block_device {
