@@ -23,6 +23,7 @@
 
   roles:
     - geerlingguy.ntp
+    - cloudalchemy.node-exporter
     # - ansible-role-aws-scripts-mon
 
 - hosts: mongodb

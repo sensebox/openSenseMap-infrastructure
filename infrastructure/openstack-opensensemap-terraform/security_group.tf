@@ -48,12 +48,12 @@ resource "openstack_compute_secgroup_v2" "ssh_from_bastion" {
   name    = "ssh_from_bastion"
   description = "Allow ssh from bastion"
   
-  rule {
-    from_port   = 22
-    to_port     = 22
-    ip_protocol = "tcp"
-    cidr        = "${var.management_allowed_cidr}"
-  }
+  # rule {
+  #   from_port   = 22
+  #   to_port     = 22
+  #   ip_protocol = "tcp"
+  #   cidr        = "${var.management_allowed_cidr}"
+  # }
 
 
 // TODO:CHECK IF THIS WORKS
@@ -61,7 +61,7 @@ resource "openstack_compute_secgroup_v2" "ssh_from_bastion" {
     from_port   = 22
     to_port     = 22
     ip_protocol = "tcp"
-    cidr        = "${openstack_compute_instance_v2.bastion.network.0.fixed_ip_v4}"
+    cidr        = "${openstack_compute_instance_v2.bastion.network.0.fixed_ip_v4}/32"
   }
 }
 

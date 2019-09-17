@@ -54,7 +54,7 @@ variable "uni_network_id" {
 }
 
 variable "management_allowed_cidr" {
-  default = "192.168.2.0/24"
+  default = "192.168.1.0/24"
 }
 
 variable "web_floating_ip" {
