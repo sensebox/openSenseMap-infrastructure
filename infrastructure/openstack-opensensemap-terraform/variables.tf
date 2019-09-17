@@ -54,7 +54,7 @@ variable "uni_network_id" {
 }
 
 variable "management_allowed_cidr" {
-  default = "192.168.2.0/24"
+  default = "192.168.1.0/24"
 }
 
 variable "web_floating_ip" {
@@ -78,6 +78,15 @@ variable "mongo_enabled" {
   description = "controls if mongo hosts will be created. If true, 3 hosts will be created."
   default     = true
 }
+
+variable openstack_key_name {
+  default = "openstack"
+} 
+
+variable openstack_key_path {
+  default = "/workdir/openstack.pem"
+}
+
 
 # variable "aws_region" {
 #   default = "eu-central-1"

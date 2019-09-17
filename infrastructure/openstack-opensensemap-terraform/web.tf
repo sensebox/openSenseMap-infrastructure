@@ -13,7 +13,7 @@ resource "openstack_compute_instance_v2" "web" {
       command = <<EOF
   docker-machine create \
     --driver generic \
-    --generic-ip-address ${openstack_compute_instance_v2.web.public_ip} \
+    --generic-ip-address ${openstack_compute_instance_v2.web.network.0.fixed_ip_v4} \
     --generic-ssh-user ubuntu \
     --generic-ssh-key ${var.openstack_key_path} \
     --engine-storage-driver overlay2 \
