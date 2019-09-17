@@ -4,8 +4,8 @@ WORKDIR="$(pwd)/workdir"
 
 echo "updating workdir ..."
 
-echo "git -C ${WORKDIR} pull origin master"
-git -C "${WORKDIR}" pull origin master
+echo "git -C ${WORKDIR} pull origin openstack"
+git -C "${WORKDIR}" pull origin openstack
 
 docker-compose run --rm -e LOCAL_USER_ID="$(id -u $USER)" cloudmanager
 
@@ -17,12 +17,12 @@ if [[ -n "$(git -C ${WORKDIR} ls-files -m -o -d)" ]]; then
 
   echo ""
   echo "(^C to abort)"
-  echo "Please enter a commit message and press enter to add (git add -A), commit (git commit -m \"YOUR MESSAGE\") and push (git push origin master) your changes."
+  echo "Please enter a commit message and press enter to add (git add -A), commit (git commit -m \"YOUR MESSAGE\") and push (git push origin openstack) your changes."
   echo -n " > "
   read msg
   while [[ -z "${msg}" ]]; do
     echo "(^C to abort)"
-    echo "Please enter a commit message and press enter to add (git add -A), commit (git commit -m \"YOUR MESSAGE\") and push (git push origin master) your changes."
+    echo "Please enter a commit message and press enter to add (git add -A), commit (git commit -m \"YOUR MESSAGE\") and push (git push origin openstack) your changes."
     echo -n " > "
     read msg
   done
@@ -34,5 +34,5 @@ if [[ -n "$(git -C ${WORKDIR} ls-files -m -o -d)" ]]; then
   git -C "${WORKDIR}" commit -m "${msg}"
 
   echo "git -C ${WORKDIR} push origin master"
-  git -C "${WORKDIR}" push origin master
+  git -C "${WORKDIR}" push origin openstack
 fi
