@@ -1,4 +1,4 @@
 ---
-xfs_disk: /dev/xvdb
-xfs_disk_partition: /dev/xvdb1
+xfs_disk: /dev/sdb
+xfs_disk_partition: /dev/sdb1
 xfs_disk_mountpoint: /mongo_xfs_data
