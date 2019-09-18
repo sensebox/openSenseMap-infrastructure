@@ -5,7 +5,7 @@ resource "openstack_compute_instance_v2" "osem_testing" {
   flavor_id = "${var.testing_flavor}"
   image_id  = "${var.ubuntu18_image_id}"
   key_pair  = "${var.openstack_osem_keypair}"
-  security_groups = ["${openstack_compute_secgroup_v2.osem_http.name}", "${openstack_compute_secgroup_v2.ssh_from_bastion.name}"]
+  security_groups = ["${openstack_compute_secgroup_v2.osem_http.name}", "${openstack_compute_secgroup_v2.ssh_from_bastion.name}", "${openstack_compute_secgroup_v2.prometheus_internal.name}"]
     
   # provisioner "local-exec" {
   #     command = <<EOF
