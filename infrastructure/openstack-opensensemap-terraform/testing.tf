@@ -7,23 +7,23 @@ resource "openstack_compute_instance_v2" "osem_testing" {
   key_pair  = "${var.openstack_osem_keypair}"
   security_groups = ["${openstack_compute_secgroup_v2.osem_http.name}", "${openstack_compute_secgroup_v2.ssh_from_bastion.name}"]
     
-  provisioner "local-exec" {
-      command = <<EOF
-  docker-machine create \
-    --driver generic \
-    --generic-ip-address ${openstack_compute_instance_v2.osem_testing.network.0.fixed_ip_v4} \
-    --generic-ssh-user ubuntu \
-    --generic-ssh-key ${var.openstack_key_path} \
-    --engine-storage-driver overlay2 \
-    opensensemap-testing
-  EOF
-  }
+  # provisioner "local-exec" {
+  #     command = <<EOF
+  # docker-machine create \
+  #   --driver generic \
+  #   --generic-ip-address ${openstack_compute_instance_v2.osem_testing.network.0.fixed_ip_v4} \
+  #   --generic-ssh-user ubuntu \
+  #   --generic-ssh-key ${var.openstack_key_path} \
+  #   --engine-storage-driver overlay2 \
+  #   opensensemap-testing
+  # EOF
+  # }
 
 
-  provisioner "local-exec" {
-    when    = "destroy"
-    command = "docker-machine rm -f -y opensensemap-testing"
-  }
+  # provisioner "local-exec" {
+  #   when    = "destroy"
+  #   command = "docker-machine rm -f -y opensensemap-testing"
+  # }
 
 
   network {
