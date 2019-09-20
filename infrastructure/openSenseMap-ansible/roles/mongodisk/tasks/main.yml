@@ -46,7 +46,7 @@
     passno: 0
 - name: create systemd unit file for setting readahead to 0 for {{ journal_disk }}
   template:
-    dest: /etc/systemd/system/set-readahead.service
+    dest: /etc/systemd/system/set-readahead_journal.service
     owner: root
     src: set-readahead.service.j2
 - name: run systemd unit file for setting readahead to 0 for {{ journal_disk }}

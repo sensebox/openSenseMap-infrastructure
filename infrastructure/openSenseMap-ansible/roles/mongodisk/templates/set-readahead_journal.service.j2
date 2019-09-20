@@ -1,0 +1,9 @@
+[Unit]
+Description=Set readahead value to 0 for {{ journal_disk }}
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "/sbin/blockdev --setra 0 {{ journal_disk }}"
+
+[Install]
+WantedBy=multi-user.target
