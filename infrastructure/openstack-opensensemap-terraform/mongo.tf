@@ -28,3 +28,19 @@ resource "openstack_compute_volume_attach_v2" "mongo" {
   instance_id  = "${element(openstack_compute_instance_v2.mongo_host.*.id, count.index)}"
   volume_id          = "${element(openstack_blockstorage_volume_v2.mongo_volume.*.id, count.index)}"
 }
+
+
+resource "openstack_blockstorage_volume_v2" "mongo_journal_volume" {
+
+  count = "${var.mongo_enabled ? 3 : 0}"
+  name  = "mongo_volume_${count.index}"
+  size  = 16
+  volume_type  = "replicated_gold"
+}
+
+resource "openstack_compute_volume_attach_v2" "mongo_journal" {
+  count = "${var.mongo_enabled ? 3 : 0}"
+  
+  instance_id  = "${element(openstack_compute_instance_v2.mongo_host.*.id, count.index)}"
+  volume_id          = "${element(openstack_blockstorage_volume_v2.mongo_journal_volume.*.id, count.index)}"
+}
