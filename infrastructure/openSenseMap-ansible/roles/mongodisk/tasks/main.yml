@@ -28,9 +28,9 @@
     enabled: yes
     state: started
 - name: create partition for journal
-  shell:  echo -e "o\nn\np\n1\n\n\nw" | fdisk {{ journal_disk }} && touch /partition_created
+  shell:  echo -e "o\nn\np\n1\n\n\nw" | fdisk {{ journal_disk }} && touch /partition_created_journal
   args:
-    creates: /partition_created
+    creates: /partition_created_journal
 - name: create xfs for journal
   filesystem:
     fstype: xfs
@@ -55,4 +55,6 @@
     daemon_reload: yes
     enabled: yes
     state: started
+- name: Change file system owners
+  file: dest={{ journal_mountpoint }} owner=mongodb group=mongodb recurse=yes
 
