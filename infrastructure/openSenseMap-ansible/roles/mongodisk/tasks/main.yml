@@ -55,6 +55,3 @@
     daemon_reload: yes
     enabled: yes
     state: started
-- name: Change file system owners
-  file: dest={{ journal_mountpoint }} owner=mongodb group=mongodb recurse=yes
-

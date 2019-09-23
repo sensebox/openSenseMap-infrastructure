@@ -21,4 +21,6 @@
     daemon_reload: yes
     enabled: yes
     state: restarted
+- name: Change file system owners
+  file: dest=/mongo_xfs_data/data/journal owner=mongodb group=mongodb recurse=yes
 
