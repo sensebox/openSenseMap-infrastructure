@@ -43,3 +43,8 @@ resource "openstack_compute_volume_attach_v2" "osem_testing" {
   instance_id        = "${openstack_compute_instance_v2.osem_testing.id}"
   volume_id          = "${openstack_blockstorage_volume_v2.osem_testing.id}"
 }
+
+resource "openstack_compute_floatingip_associate_v2" "osem_testing" {
+  floating_ip        = "${var.testing_floating_ip}"
+  instance_id        = "${openstack_compute_instance_v2.osem_testing.id}"
+}
