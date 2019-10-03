@@ -5,7 +5,7 @@ resource "openstack_compute_instance_v2" "web" {
   name      = "web"
   key_pair  = "${var.openstack_osem_keypair}"
   image_id  = "${var.ubuntu18_image_id}"
-  security_groups = ["${openstack_compute_secgroup_v2.osem_http.name}", "${openstack_compute_secgroup_v2.ssh_from_bastion.name}", "${openstack_compute_secgroup_v2.prometheus_internal.name}", "${openstack_compute_secgroup_v2.docker_external.name}"]
+  security_groups = ["${openstack_compute_secgroup_v2.osem_http.name}", "${openstack_compute_secgroup_v2.ssh_from_bastion.name}", "${openstack_compute_secgroup_v2.prometheus_internal.name}", "${openstack_compute_secgroup_v2.docker_external.name}", "${openstack_compute_secgroup_v2.mongo_internal.name}"]
 
   depends_on = ["openstack_networking_subnet_v2.internal-subnet"]
 
