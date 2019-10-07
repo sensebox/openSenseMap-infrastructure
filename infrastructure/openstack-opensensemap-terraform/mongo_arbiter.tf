@@ -30,7 +30,7 @@ resource "openstack_blockstorage_volume_v2" "mongo_arbiter_journal_volume" {
 
   name  = "mongo_arbiter_journal_volume"
   size  = 2
-  volume_type  = "replicated_gold"
+  volume_type  = "replicated_bronze"
 }
 
 resource "openstack_compute_volume_attach_v2" "mongo_arbiter_journal" {
