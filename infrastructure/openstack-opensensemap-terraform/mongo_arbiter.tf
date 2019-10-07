@@ -23,5 +23,5 @@ resource "openstack_blockstorage_volume_v2" "mongo_volume_arbiter" {
 resource "openstack_compute_volume_attach_v2" "mongo_arbiter" {
   
   instance_id  = "${openstack_compute_instance_v2.mongo_host_arbiter.id}"
-  volume_id          = "${openstack_blockstorage_volume_v2.mongo_volume.mongo_host_arbiter.id}"
+  volume_id          = "${openstack_blockstorage_volume_v2.mongo_volume_arbiter.id}"
 }
