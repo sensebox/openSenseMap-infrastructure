@@ -83,6 +83,30 @@ resource "openstack_compute_secgroup_v2" "mongo_internal" {
     ip_protocol  = "tcp"
     self         = true
   }
+  rule {
+    from_port    = 27017
+    to_port      = 27017
+    ip_protocol  = "tcp"
+    cidr         = "18.197.134.40/32"
+  }
+  rule {
+    from_port    = 27017
+    to_port      = 27017
+    ip_protocol  = "tcp"
+    cidr         = "18.185.93.216/32"
+  }
+  rule {
+    from_port    = 27017
+    to_port      = 27017
+    ip_protocol  = "tcp"
+    cidr         = "35.159.12.78/32"
+  }
+  rule {
+    from_port    = 27017
+    to_port      = 27017
+    ip_protocol  = "tcp"
+    cidr         = "52.57.90.92/32"
+  }
 }
 
 resource "openstack_compute_secgroup_v2" "docker_external" {
