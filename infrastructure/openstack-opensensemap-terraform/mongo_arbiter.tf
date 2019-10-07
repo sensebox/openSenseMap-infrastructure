@@ -33,7 +33,7 @@ resource "openstack_blockstorage_volume_v2" "mongo_arbiter_journal_volume" {
   volume_type  = "replicated_gold"
 }
 
-resource "openstack_compute_volume_attach_v2" "mongo_journal" {
+resource "openstack_compute_volume_attach_v2" "mongo_arbiter_journal" {
   
   instance_id  = "${openstack_compute_instance_v2.mongo_host_arbiter.id}"
   volume_id          = "${openstack_blockstorage_volume_v2.mongo_arbiter_journal_volume.id}"
