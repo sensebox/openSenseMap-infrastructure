@@ -5,7 +5,7 @@ resource "openstack_compute_instance_v2" "bastion" {
   flavor_id = "${var.bastion_flavor}"
   image_id  = "${var.ubuntu18_image_id}"
   key_pair  = "${var.bastion_keypair}"
-  security_groups = ["${openstack_compute_secgroup_v2.ssh_to_bastion.name}"]
+  security_groups = ["${openstack_compute_secgroup_v2.ssh_to_bastion.name}", "${openstack_compute_secgroup_v2.osem_http.name}"]
 
   #depends_on = ["openstack_networking_subnet_v2.external-subnet"]
 
