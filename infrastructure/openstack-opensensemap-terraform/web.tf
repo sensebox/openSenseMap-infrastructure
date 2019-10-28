@@ -4,11 +4,20 @@ resource "openstack_compute_instance_v2" "web" {
   flavor_id = "${var.web_flavor}"
   name      = "web"
   key_pair  = "${var.openstack_osem_keypair}"
-  image_id  = "${var.ubuntu18_image_id}"
+  # image_id  = "${var.ubuntu18_image_id}"
   security_groups = ["${openstack_compute_secgroup_v2.osem_http.name}", "${openstack_compute_secgroup_v2.ssh_from_bastion.name}", "${openstack_compute_secgroup_v2.prometheus_internal.name}", "${openstack_compute_secgroup_v2.docker_external.name}", "${openstack_compute_secgroup_v2.mongo_internal.name}"]
 
   depends_on = ["openstack_networking_subnet_v2.internal-subnet"]
 
+
+  block_device {
+    uuid                  = "${var.ubuntu18_image_id}"
+    source_type           = "image"
+    destination_type      = "volume"
+    boot_index            = 0
+    delete_on_termination = true
+    volume_size           = "${var.web_size}"
+  }
   # provisioner "local-exec" {
   #     command = <<EOF
   # docker-machine create \
@@ -32,18 +41,6 @@ resource "openstack_compute_instance_v2" "web" {
     name = "osem-internal"
   }
  
-}
-
-# Create volume
-resource "openstack_blockstorage_volume_v2" "web" {
-  name               = "web"
-  size               = "${var.web_size}"
-}
-
-# Attach volume to instance instance web
-resource "openstack_compute_volume_attach_v2" "web" {
-  instance_id        = "${openstack_compute_instance_v2.web.id}"
-  volume_id          = "${openstack_blockstorage_volume_v2.web.id}"
 }
 
 # Attach floating ip to instance
