@@ -1,4 +1,5 @@
 
+
 # VARIABLES FOR WEB SERVER
 variable "web_flavor" {
   default = "xlarge"
@@ -8,6 +9,9 @@ variable "blockly_flavor" {
 }
 variable "testing_flavor" {
   default = "medium"
+}
+variable "workshop_flavor" {
+  default = "large"
 }
 
 variable "mongo_flavor" {
@@ -32,6 +36,9 @@ variable "mongo_size" {
 }
 variable "testing_size" {
   default = "100"
+}
+variable "workshop_size" {
+  default = "150"
 }
 variable "bastion_size" {
   default = "100"
@@ -70,6 +77,9 @@ variable "testing_floating_ip" {
 }
 variable "blockly_floating_ip" {
   default = "128.176.196.24"
+}
+variable "workshop_floating_ip" {
+  default = "128.176.196.27"
 }
 
 
