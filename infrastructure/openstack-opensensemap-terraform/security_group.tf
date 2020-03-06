@@ -115,6 +115,49 @@ resource "openstack_compute_secgroup_v2" "mongo_internal" {
   }
 }
 
+//THIS CAN BE REMOVED ONCE TESTING IS DONE, needed now because we dont want to change the production security group
+resource "openstack_compute_secgroup_v2" "mongo_internal_new" {
+  name        = "tf_mongo_internal_new"
+  description = "allow mongodb servers to communicate with each other"
+
+  rule {
+    from_port    = 27017
+    to_port      = 27017
+    ip_protocol  = "tcp"
+    self         = true
+  }
+  rule {
+    from_port    = 27017
+    to_port      = 27017
+    ip_protocol  = "tcp"
+    cidr         = "18.197.134.40/32"
+  }
+  rule {
+    from_port    = 27017
+    to_port      = 27017
+    ip_protocol  = "tcp"
+    cidr         = "18.185.93.216/32"
+  }
+  rule {
+    from_port    = 27017
+    to_port      = 27017
+    ip_protocol  = "tcp"
+    cidr         = "35.159.12.78/32"
+  }
+  rule {
+    from_port    = 27017
+    to_port      = 27017
+    ip_protocol  = "tcp"
+    cidr         = "52.57.90.92/32"
+  }
+  rule {
+    from_port    = 27017
+    to_port      = 27017
+    ip_protocol  = "tcp"
+    cidr         = "3.123.152.169/32"
+  }
+}
+
 resource "openstack_compute_secgroup_v2" "docker_external" {
   name        = "tf_docker_external"
   description = "allow ingress traffic on tcp port 2376 for docker from ${var.management_allowed_cidr}"

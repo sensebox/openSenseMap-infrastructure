@@ -6,7 +6,7 @@ resource "openstack_compute_instance_v2" "mongo_host_new" {
   flavor_id = "${var.mongo_flavor}"
   image_id  = "${var.ubuntu18_image_id}"
   key_pair  = "${var.openstack_osem_keypair}"
-  security_groups = ["${openstack_compute_secgroup_v2.mongo_internal.name}", "${openstack_compute_secgroup_v2.ssh_from_bastion.name}", "${openstack_compute_secgroup_v2.prometheus_internal.name}"]
+  security_groups = ["${openstack_compute_secgroup_v2.mongo_internal_new.name}", "${openstack_compute_secgroup_v2.ssh_from_bastion.name}", "${openstack_compute_secgroup_v2.prometheus_internal.name}"]
 
   network {
     uuid = "${openstack_networking_subnet_v2.internal-subnet.network_id}"
