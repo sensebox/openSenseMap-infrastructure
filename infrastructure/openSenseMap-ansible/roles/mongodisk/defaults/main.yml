@@ -3,6 +3,6 @@ xfs_disk: /dev/sdb
 xfs_disk_partition: /dev/sdb1
 xfs_disk_mountpoint: /mongo_xfs_data
 
-journal_disk: /dev/sdc
-journal_partition: /dev/sdc1
-journal_mountpoint: /mongo_xfs_data/data/journal
+# journal_disk: /dev/sdc
+# journal_partition: /dev/sdc1
+# journal_mountpoint: /mongo_xfs_data/data/journal

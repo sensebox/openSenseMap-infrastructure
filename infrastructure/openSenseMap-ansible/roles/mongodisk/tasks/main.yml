@@ -27,31 +27,31 @@
     daemon_reload: yes
     enabled: yes
     state: started
-- name: create partition for journal
-  shell:  echo -e "o\nn\np\n1\n\n\nw" | fdisk {{ journal_disk }} && touch /partition_created_journal
-  args:
-    creates: /partition_created_journal
-- name: create xfs for journal
-  filesystem:
-    fstype: xfs
-    dev: "{{ journal_partition }}"
-- name: mount xfs disk for journal
-  mount:
-    state: mounted
-    fstype: xfs
-    opts: defaults,noatime,discard
-    src: "{{ journal_partition }}"
-    name: "{{ journal_mountpoint }}"
-    dump: 0
-    passno: 0
-- name: create systemd unit file for setting readahead to 0 for {{ journal_disk }}
-  template:
-    dest: /etc/systemd/system/set-readahead_journal.service
-    owner: root
-    src: set-readahead.service.j2
-- name: run systemd unit file for setting readahead to 0 for {{ journal_disk }}
-  systemd:
-    name: set-readahead
-    daemon_reload: yes
-    enabled: yes
-    state: started
+# - name: create partition for journal
+#   shell:  echo -e "o\nn\np\n1\n\n\nw" | fdisk {{ journal_disk }} && touch /partition_created_journal
+#   args:
+#     creates: /partition_created_journal
+# - name: create xfs for journal
+#   filesystem:
+#     fstype: xfs
+#     dev: "{{ journal_partition }}"
+# - name: mount xfs disk for journal
+#   mount:
+#     state: mounted
+#     fstype: xfs
+#     opts: defaults,noatime,discard
+#     src: "{{ journal_partition }}"
+#     name: "{{ journal_mountpoint }}"
+#     dump: 0
+#     passno: 0
+# - name: create systemd unit file for setting readahead to 0 for {{ journal_disk }}
+#   template:
+#     dest: /etc/systemd/system/set-readahead_journal.service
+#     owner: root
+#     src: set-readahead.service.j2
+# - name: run systemd unit file for setting readahead to 0 for {{ journal_disk }}
+#   systemd:
+#     name: set-readahead
+#     daemon_reload: yes
+#     enabled: yes
+#     state: started
