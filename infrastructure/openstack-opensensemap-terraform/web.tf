@@ -10,6 +10,15 @@ resource "openstack_compute_instance_v2" "web" {
   depends_on = ["openstack_networking_subnet_v2.internal-subnet"]
 
 
+  block_device {
+    uuid                  = "${var.ubuntu18_image_id}"
+    source_type           = "image"
+    destination_type      = "volume"
+    boot_index            = 0
+    delete_on_termination = true
+    volume_size           = "${var.web_size}"
+    volume_type           = "replicated_gold"
+  }
   # provisioner "local-exec" {
   #     command = <<EOF
   # docker-machine create \
@@ -33,18 +42,6 @@ resource "openstack_compute_instance_v2" "web" {
     name = "osem-internal"
   }
  
-}
-
-resource "openstack_blockstorage_volume_v2" "web_volume" {
-
-  name  = "web_volume"
-  size  = "${var.web_size}"
-  volume_type  = "replicated_gold"
-}
-
-resource "openstack_compute_volume_attach_v2" "web" {
-  instance_id  = "${openstack_compute_instance_v2.web.id}"
-  volume_id    = "${openstack_blockstorage_volume_v2.web_volume.id}"
 }
 
 # Attach floating ip to instance
