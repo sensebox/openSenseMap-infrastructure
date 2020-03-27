@@ -2,7 +2,7 @@
 
 # VARIABLES FOR WEB SERVER
 variable "web_flavor" {
-  default = "xlarge"
+  default = "2xlarge"
 }
 variable "blockly_flavor" {
   default = "large"
