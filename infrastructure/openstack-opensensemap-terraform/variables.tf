@@ -22,6 +22,9 @@ variable "bastion_flavor" {
   default = "medium"
 }
 
+variable "sensor_wiki_flavor" {
+  default = "medium"
+}
 variable "openstack_osem_keypair" {
   default = "openstack"
 }
@@ -45,6 +48,9 @@ variable "bastion_size" {
 }
 variable "blockly_size" {
   default = "80"
+}
+variable "sensor_wiki_size" {
+  default = "200"
 }
 
 #GENERAL VARIABLES
@@ -75,7 +81,12 @@ variable "bastion_floating_ip" {
 variable "testing_floating_ip" {
   default = "128.176.196.23"
 }
+
+//BLOCKLY NOT USED FOR NOW, IF USED NEED MORE IPs
 variable "blockly_floating_ip" {
+  default = "128.176.196.24"
+}
+variable "sensor_wiki_floating_ip" {
   default = "128.176.196.24"
 }
 variable "workshop_floating_ip" {
