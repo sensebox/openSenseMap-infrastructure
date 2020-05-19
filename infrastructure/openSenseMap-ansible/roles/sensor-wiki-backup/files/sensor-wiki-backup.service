@@ -1,0 +1,9 @@
+[Unit]
+Description=Backup SensorWiki to S3
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /usr/local/bin/sensor-wiki-backup.sh
+
+[Install]
+WantedBy=multi-user.target

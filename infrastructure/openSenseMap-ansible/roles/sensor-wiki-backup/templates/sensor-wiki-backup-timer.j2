@@ -1,0 +1,8 @@
+[Unit]
+Description=Perform MongoDB backup
+
+[Timer]
+OnCalendar={{ sensorwikibackup_oncalendar }}
+
+[Install]
+WantedBy=timers.target

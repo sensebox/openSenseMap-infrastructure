@@ -43,3 +43,10 @@
     - mongopostconf
     - mongobackup
     # - ansible-role-aws-scripts-mon
+
+- hosts: sensorwiki
+  vars_files:
+    - "{{ vars_file }}"
+  become: yes
+  roles:
+    - sensor-wiki-backup

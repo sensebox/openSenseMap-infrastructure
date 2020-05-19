@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+
+FUSEKI_HOST=127.0.0.1:3030
+FUSEKI_USER="{{ fuseki_user }}"
+FUSEKI_PASS="{{ fuseki_pass }}"
+
+BACKUP_FOLDER="{{ sensorwiki_backup_folder }}"
+
+S3_ACCESS_KEY="{{ s3_access_key }}"
+S3_SECRET="{{ s3_secret }}"
+
+BACKUP_FOLDER="/var/lib/docker/volumes/fuseki-data/_data/backups"
+
+RESULT="`wget --post-data="" --user "$FUSEKI_USER" --password "$FUSEKI_PASS" -qO- http://localhost:3030/$/backup/senph | jq -r '.taskId'`"
+
+while [ -z "$finished" ] || [ "$finished" == "null" ];
+do
+    echo "TASK ID: " $RESULT
+    started=$(wget --user "$FUSEKI_USER" --password $FUSEKI_PASS -qO- http://localhost:3030/$/tasks/${RESULT} | jq -r '.started')
+    finished=$(wget --user "$FUSEKI_USER" --password $FUSEKI_PASS -qO- http://localhost:3030/$/tasks/${RESULT} | jq -r '.finished')
+    echo "FINISHED SET TO:" $finished 
+    sleep 60;
+done
+
+started=${started//:/-}
+started=${started//T/_}
+
+echo "UPLOADING FILE $BACKUP_FOLDER/senph_${started:0:19}.nq.gz"
+aws configure set aws_access_key_id "$S3_ACCESS_KEY"
+aws configure set aws_secret_access_key "$S3_SECRET"
+aws configure set aws_secret_access_key ONa+Rla9yE0WF+hz7X4zivjZoleUJpRsR3kq13SL
+aws configure set default.region eu-central-1
+aws s3 cp $BACKUP_FOLDER/senph_${started:0:19}.nq.gz s3://sensor-wiki/
+
+trap cleanup EXIT
+
+
