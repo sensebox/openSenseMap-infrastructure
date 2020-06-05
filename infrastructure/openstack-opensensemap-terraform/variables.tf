@@ -52,6 +52,9 @@ variable "blockly_size" {
 variable "sensor_wiki_size" {
   default = "200"
 }
+variable "data_exporter_size" {
+  default = "200"
+}
 
 #GENERAL VARIABLES
 
