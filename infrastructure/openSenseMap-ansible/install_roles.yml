@@ -6,7 +6,7 @@
 
 # Stouts.mongodb role from github
 - src: https://github.com/Stouts/Stouts.mongodb.git
-  version: a64cd189da8b42b0efe82ddad9759b5e17c5677f
+  version: 5ea5e243bc17bb37483d4bc2ecba080ac465d1cb
 
 # swapfile role
 - src: oefenweb.swapfile
