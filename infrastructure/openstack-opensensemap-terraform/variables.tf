@@ -35,7 +35,7 @@ variable "web_size" {
   default = "250"
 }
 variable "mongo_size" {
-  default = "500"
+  default = "1000"
 }
 variable "testing_size" {
   default = "100"
